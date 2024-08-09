@@ -1,0 +1,14 @@
+<mat-toolbar class="navbar">
+    <div class="navbar-item">
+        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1><span class="title-first-half">Clinic</span>Sync</h1>
+    </div>
+    <div class="navbar-item">
+        @if (!this.breakpointService.isMobile()) {
+            <span class="navbar-message">hello, Admin</span>
+        }
+        <mat-icon class="profile-picture">account_circle</mat-icon>
+    </div> 
+</mat-toolbar>

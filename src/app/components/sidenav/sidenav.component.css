@@ -1,0 +1,32 @@
+mat-sidenav-container {
+    height:100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+mat-sidenav {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+      padding-top: 4rem;
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+}
+
+mat-sidenav-content{
+    padding-top: 3.5rem;
+    padding-left: 1rem;
+    @media screen and (min-width: 600px) {
+        padding-top: 4rem;
+    }
+}
+
+mat-nav-list a {
+    border-radius: 0% !important;    
+}

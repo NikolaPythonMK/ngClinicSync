@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <div class="login-content">
+        <div class="clinic-title">
+            <span class="first-part">Clinic</span><span class="second-part">Sync</span>
+        </div>   
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"  class="login-container"> 
+            @if (errorMessage) {
+                <error-header [errorMessage]="errorMessage"></error-header>
+            }
+            <div class="login-title">
+                <span>Log in</span>
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Enter your email</mat-label>
+                <input
+                    formControlName="email"
+                    name="email"
+                    matInput
+                />
+            </mat-form-field>
+
+            <div class="password-container">
+                <mat-form-field appearance="outline" style=" margin-bottom: -15px">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide() ? 'password' : 'text'"
+                           formControlName="password"
+                           name="password" />
+                    <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="showPassword($event)"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()"
+                    >
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <p class="forgot-password">Forgot password</p>
+            </div>
+
+            <button type="submit" mat-flat-button [disabled]="loginForm.invalid" class="confirm-btn">Confirm</button>
+        </form>
+
+        <div class="create-acc">Don't have an account? Create one <a routerLink="/register" class="link-highlight">here</a>.</div>
+        
+    </div>
+    <div id="container">
+        <div id="gradient1"> </div>
+        <div id="gradient2"> </div>
+    </div>
+</div>

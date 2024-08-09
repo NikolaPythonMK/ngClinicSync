@@ -1,0 +1,64 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="clinic-title">
+            <span class="first-part">Clinic</span><span class="second-part">Sync</span>
+        </div>   
+
+        @if (errorMessage){
+            <error-header [errorMessage]="errorMessage"></error-header>
+        }
+
+        <p class="create-label">Create an account</p>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="field-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Enter your email</mat-label>
+                <input
+                    formControlName="email"
+                    name="email"
+                    matInput
+                />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style=" margin-bottom: -15px">
+                <mat-label>Enter your password</mat-label>
+                <input matInput
+                       name="password"
+                       formControlName="password"
+                       [type]="hidePassword() ? 'password' : 'text'" />
+                <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="showPassword($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword()"
+                >
+                <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style=" margin-bottom: -15px">
+                <mat-label>Confirm your password</mat-label>
+                <input matInput
+                       name="confirmPassword"
+                       formControlName="confirmPassword"
+                       [type]="hidePassword() ? 'password' : 'text'" />
+                <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="showPassword($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword()"
+                >
+                <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-flat-button type="submit" [disabled]="registerForm.invalid"  class="confirm-btn">Confirm</button>
+        </form>
+
+        <p class="visit-login">Already have an account? Go to the <a routerLink="/login" class="link-highlight">login page</a>.</p>
+    </div>
+</div>

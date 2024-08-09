@@ -1,0 +1,31 @@
+<mat-sidenav-container autosize>
+    <mat-sidenav [mode]="breakpointService.isMobile() ? 'over' : 'side'"
+                 [opened]="toggleMenu" class="sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/appointments" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="entry">
+            <mat-icon>calendar_month</mat-icon>
+            <span>Appointments</span>
+          </span>
+        </a>
+        <a mat-list-item routerLink="/logs" routerLinkActive="active" ariaCurrentWhenActive="page">
+          <span class="entry">
+             <mat-icon>list_alt</mat-icon>
+             <span>Log</span>
+           </span>
+        </a>
+        <a mat-list-item routerLink="/clients" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <span class="entry">
+               <mat-icon>people</mat-icon>
+               <span>Clients</span>
+             </span>
+        </a>
+        <a mat-list-item routerLink="/labels" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <span class="entry">
+               <mat-icon>label</mat-icon>
+               <span>Labels</span>
+             </span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+</mat-sidenav-container>
