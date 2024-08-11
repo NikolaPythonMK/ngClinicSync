@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, catchError, map, of } from "rxjs";
+import { Observable, catchError, map, of, tap } from "rxjs";
 import { LoginResponse } from "../models/loginResponse";
 import { URL } from "../constants/db";
 import { jwtDecode } from 'jwt-decode';
@@ -15,6 +15,7 @@ export class AuthService {
 
     public login(credentials: FormData): Observable<LoginResponse> {
         return this.http.post<string>(URL + 'login', credentials).pipe(
+            tap((result) => console.log(result)),
             map(result => {
                 this.setToken(result);
                 return { status: true };
@@ -27,6 +28,7 @@ export class AuthService {
 
     public register(credentials: FormData): Observable<LoginResponse> {
         return this.http.post<string>(URL + 'registser', credentials).pipe(
+            tap((result) => console.log(result)),
             map(result => {
                 this.setToken(result);
                 return { status: true };
@@ -39,7 +41,6 @@ export class AuthService {
 
     public logout(): void {
         localStorage.removeItem('token');
-        // Notify the backend
     }
 
     public isAuthenticated(): boolean {
@@ -53,11 +54,6 @@ export class AuthService {
             return decodedToken.exp > currentTime;
         }
         return false;
-
-        // Clock Skew: In practice, there might be slight differences between the server’s and client’s clocks.
-        // Although this is usually not a problem, it’s something to be aware of in high-security scenarios.
-
-        // the validation should be on the backend
     }
 
     private setToken(token: string): void {
