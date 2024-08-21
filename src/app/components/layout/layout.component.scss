@@ -1,8 +1,10 @@
 .container{
     height: 100%;
     display: flex;
+    width: 100%;
 
     .content{
         margin-top: 5em;
+        width: 100%;
     }
 }

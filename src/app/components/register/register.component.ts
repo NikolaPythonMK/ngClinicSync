@@ -10,6 +10,7 @@ import { passwordStrengthValidator } from "../../validators/password-strength.va
 import { matchPasswordValidator } from "../../validators/password-match.validator";
 import { AuthService } from "../../services/auth.service";
 import { ErrorHeaderComponent } from "../error-header/errorHeader.component";
+import { RegisterRequest } from "../../models/register-request";
 
 
 @Component({
@@ -35,15 +36,16 @@ export class RegisterComponent {
     }
 
     onSubmit(): void {
-        let formData = new FormData();
-        formData.append('email', this.registerForm.controls['email'].value);
-        formData.append('password', this.registerForm.controls['password'].value);
+        const credentials: RegisterRequest = {
+            username: this.registerForm.controls['email'].value,
+            password: this.registerForm.controls['password'].value
+        }
 
-        this.authService.register(formData).subscribe({
+        this.authService.register(credentials).subscribe({
             next: () => {
-                this.router.navigate(['/appointments'])
+                this.router.navigate(['/templates'])
             },
-            error: (error) => {
+            error: (error: string) => {
                 this.errorMessage = error;
             }
         })

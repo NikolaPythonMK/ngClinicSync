@@ -1,1 +1,75 @@
-<h1>Templates</h1>
+<div class="wrapper">
+
+<content-header title="Templates" [totalCount]="totalElements" class="header"></content-header>
+
+@if (totalElements === 0) {
+  <div>There are currently no appointment templates to display.</div>
+}
+@else if (errorMessage){
+  <div>{{ errorMessage }}</div>
+}
+@else {
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let template"> {{template.id}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let template"> {{template.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let template"> {{template.description}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef> Duration </th>
+        <td mat-cell *matCellDef="let template"> {{template.duration}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let template"> {{template.price}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr>
+  </table>
+ </div>
+  
+  <mat-paginator
+    class="paginator"
+    [length]="totalElements"
+    [pageIndex]="0"
+    [pageSize]="15"
+    [pageSizeOptions]="[5, 10, 15, 25, 100]"
+    (page)="handlePageChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+}
+ </div> 
+ 

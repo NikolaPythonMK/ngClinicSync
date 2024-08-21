@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <div class="title-container">
+        <h1>{{ title }}</h1>
+        @if (totalCount !== null) {
+            <span class="totalCount">{{ totalCount }}</span>
+        }
+    </div>
+    <div class="filters-container">
+        <button class="create-button" (click)="openDialog()">Create</button>
+        <mat-form-field appearance="outline" class="search-input">
+            <input matInput placeholder="Search">
+            <button mat-icon-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+    </div>
+</div>

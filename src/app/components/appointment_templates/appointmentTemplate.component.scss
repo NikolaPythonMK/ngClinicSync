@@ -1,0 +1,19 @@
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 90%;
+    margin-top: 2em;
+}
+
+.table-container {
+    width: 90%;
+}
+
+.paginator {
+    margin-top: 1em;
+}

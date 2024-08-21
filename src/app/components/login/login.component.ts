@@ -8,6 +8,7 @@ import { Router, RouterLink } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { ErrorHeaderComponent } from "../error-header/errorHeader.component";
+import { LoginRequest } from "../../models/login-request";
 
 @Component({
     selector: 'login-app',
@@ -30,15 +31,16 @@ export class LoginComponent {
     }
 
     onSubmit(): void {
-      const formData = new FormData();
-      formData.append('email', this.loginForm.controls['email'].value);
-      formData.append('password', this.loginForm.controls['password'].value);
+      const credentials: LoginRequest = {
+        username: this.loginForm.controls['email'].value,
+        password: this.loginForm.controls['password'].value
+      }
 
-      this.authService.login(formData).subscribe({
+      this.authService.login(credentials).subscribe({
         next: () => {
-          this.router.navigate(['/appointments']);
+          this.router.navigate(['/templates']);
         },
-        error: (error) => {
+        error: (error: string) => {
           this.errorMessage = error;
         }
       })

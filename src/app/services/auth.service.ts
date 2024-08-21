@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Observable, catchError, map, of, tap } from "rxjs";
-import { LoginResponse } from "../models/loginResponse";
-import { URL } from "../constants/db";
+import { Observable, catchError, map, of, tap, throwError } from "rxjs";
+import { DefaultResponse } from "../models/default-response";
+import { URL } from "../constants/constants";
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from "@angular/common/http";
+import { RegisterRequest } from "../models/register-request";
+import { LoginRequest } from "../models/login-request";
  
 
 @Injectable({
@@ -13,30 +15,12 @@ export class AuthService {
 
     constructor(private http: HttpClient){}
 
-    public login(credentials: FormData): Observable<LoginResponse> {
-        return this.http.post<string>(URL + 'login', credentials).pipe(
-            tap((result) => console.log(result)),
-            map(result => {
-                this.setToken(result);
-                return { status: true };
-            }),
-            catchError(error => {
-                return of({ status: false, errorMessage: error });
-            })
-        );
+    public login(credentials: LoginRequest): Observable<DefaultResponse> {
+        return this.authenticate('login', credentials);
     }
 
-    public register(credentials: FormData): Observable<LoginResponse> {
-        return this.http.post<string>(URL + 'registser', credentials).pipe(
-            tap((result) => console.log(result)),
-            map(result => {
-                this.setToken(result);
-                return { status: true };
-            }),
-            catchError(error => {
-                return of({ status: false, errorMessage: error });
-            })
-        )
+    public register(credentials: RegisterRequest): Observable<DefaultResponse> {
+        return this.authenticate('register', credentials);
     }
 
     public logout(): void {
@@ -56,8 +40,17 @@ export class AuthService {
         return false;
     }
 
+    private authenticate(endpoint: string, credentials: LoginRequest | RegisterRequest): Observable<DefaultResponse> {
+        return this.http.post<string>(`${URL}${endpoint}`, credentials).pipe(
+            tap(response => this.setToken(response)),
+            map(() => ({ status: true })),
+            catchError(errorResponse => {
+                return throwError(() => new Error(errorResponse.error));
+            })
+        )
+    }
+
     private setToken(token: string): void {
         localStorage.setItem('token', token);
     }
-
 }

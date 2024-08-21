@@ -9,6 +9,13 @@
         @if (!this.breakpointService.isMobile()) {
             <span class="navbar-message">hello, Admin</span>
         }
-        <mat-icon class="profile-picture">account_circle</mat-icon>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon class="profile-picture">account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Account details</button>
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+          </mat-menu>
     </div> 
 </mat-toolbar>

@@ -1,4 +1,4 @@
-export interface LoginResponse {
+export interface DefaultResponse {
     status: boolean,
     errorMessage?: string
 }
