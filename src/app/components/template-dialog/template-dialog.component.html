@@ -1,1 +1,54 @@
-<h1>This is a dialog</h1>
+<h1 mat-dialog-title>
+    @if (data === null) {
+        <span>Create appointment template</span>
+    }@else {
+        <span>Update appointment template</span>
+    }
+</h1>
+<mat-dialog-content>
+    <div class="form">
+        <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Name</mat-label>
+            <input
+                [(ngModel)]="name"
+                name="name"
+                matInput
+            />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Duration</mat-label>
+            <input
+                [(ngModel)]="duration"
+                type="number"
+                name="duration"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput
+                      rows="10"
+                      name="description"
+                      [(ngModel)]="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input
+                type="number"
+                name="price"
+                matInput
+                [(ngModel)]="price"
+            />
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+@if (isSubmitted && name.length === 0){
+    <p class="error-message">Name is required.</p>
+}
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button (click)="onSubmit()">Submit</button>
+</mat-dialog-actions>

@@ -4,6 +4,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
 import { TemplateDialogComponent } from "../template-dialog/template-dialog.component";
+import { AppointmentTemplateRequest } from "../../models/appointment-template-request";
+import { TemplateService } from "../../services/template.service";
+import { NotificationService } from "../../services/notification.service";
 
 
 
@@ -19,8 +22,27 @@ export class ContentHeader {
     @Input() totalCount: number | null = null;
     readonly dialog = inject(MatDialog);
 
-    openDialog() {
-        const dialogRef = this.dialog.open(TemplateDialogComponent);
-    }
+    constructor(private templateService: TemplateService,
+                private notificationService: NotificationService
+    ){}
 
+    openDialog() {
+        const dialogRef = this.dialog.open(TemplateDialogComponent, {
+            width: '600px',
+            height: '750px'
+        });
+
+        dialogRef.afterClosed().subscribe((result: AppointmentTemplateRequest) => {
+            if (result) {
+                this.templateService.add(result).subscribe({
+                    next: () => {
+                        this.notificationService.success('The appointment template has been added successfully.')
+                    },
+                    error: (error) => {
+                        this.notificationService.error(error.message);
+                    }
+                })
+            }
+        })
+    }
 }
