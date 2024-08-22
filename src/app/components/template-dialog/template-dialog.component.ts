@@ -17,9 +17,9 @@ import { AppointmentTemplateRequest } from "../../models/appointment-template-re
 export class TemplateDialogComponent implements OnInit{
 
     name: string = '';
-    description: string = '';
-    price?: number | undefined;
-    duration?: number | undefined;
+    description?: string;
+    price?: number;
+    duration?: number;
 
     isSubmitted: boolean = false;
 
@@ -43,9 +43,9 @@ export class TemplateDialogComponent implements OnInit{
 
         const template: AppointmentTemplateRequest = {
             name: this.name,
-            duration: this.duration === undefined ? 0 : this.duration,
+            durationInMinutes: this.duration,
             description: this.description,
-            price: this.price === undefined ? 0 : this.price
+            price: this.price
         }
         this.dialogRef.close(template);
     }

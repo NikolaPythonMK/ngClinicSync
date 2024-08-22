@@ -35,7 +35,7 @@ export class ContentHeader {
         dialogRef.afterClosed().subscribe((result: AppointmentTemplateRequest) => {
             if (result) {
                 this.templateService.add(result).subscribe({
-                    next: () => {
+                    next: (result) => {
                         this.notificationService.success('The appointment template has been added successfully.')
                     },
                     error: (error) => {
