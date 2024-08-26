@@ -1,0 +1,30 @@
+.sidenav-container {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 100%;
+    margin-top: 4em;
+}
+.sidenav-list {
+    margin: 0;
+    padding: 0;
+    .sidenav-element {
+        text-decoration: none;
+        color: #737387;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 1em;
+        .element-text {
+            padding-left: 1em;
+            padding-right: 2em;
+        }
+    }
+    .sidenav-element:hover {
+        color: #6CB4EE;
+        background-color: #f8f9fa;
+    }
+}
+
+.active {
+    background-color: #f8f9fa;
+    color: #6CB4EE !important;
+}

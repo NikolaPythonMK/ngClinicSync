@@ -24,4 +24,16 @@ export class TemplateService {
     update(template: AppointmentTemplateRequest, templateId: number): Observable<AppointmentTemplate> {
         return this.http.put<AppointmentTemplate>(`${URL}${'templates'}/${templateId}`, template);
     }
+
+    deleteSingle(id: number): Observable<AppointmentTemplate> {
+        return this.http.delete<AppointmentTemplate>(`${URL}${'templates'}/${id}`);
+    }
+
+    deleteSelection(deleteAll: boolean = false, ids: number[]): Observable<number> {
+        const params = {
+            ids: ids.join(','),
+            all: deleteAll,
+        }
+        return this.http.delete<number>(`${URL}${'templates'}`, { params });
+    }
 }

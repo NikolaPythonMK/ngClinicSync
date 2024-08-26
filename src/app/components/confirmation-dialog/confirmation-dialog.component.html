@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+
+<mat-dialog-content class="content">
+    <mat-icon [className]="data.alert"><span class="alert-icon">{{data.alert}}</span></mat-icon>
+    <span class="text" [innerHTML]="data.text"></span>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button (click)="handleConfirmation()">Confirm</button>    
+</mat-dialog-actions>

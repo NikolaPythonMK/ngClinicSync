@@ -15,15 +15,32 @@
                 matInput
             />
         </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Duration</mat-label>
-            <input
-                [(ngModel)]="duration"
-                type="number"
-                name="duration"
-                matInput
-            />
-        </mat-form-field>
+
+        <div>
+            <label>Duration</label>
+            <div class="duration-group">
+                <mat-form-field appearance="outline" class="hours-input">
+                    <mat-label>Hours</mat-label>
+                    <input
+                        [(ngModel)]="hours"
+                        type="number"
+                        min="0"
+                        name="hours"
+                        matInput
+                    />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Minutes</mat-label>
+                    <input
+                        [(ngModel)]="minutes"
+                        type="number"
+                        name="minutes"
+                        min="0"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
 
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
@@ -48,7 +65,14 @@
     <p class="error-message">Name is required.</p>
 }
 
-<mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-flat-button (click)="onSubmit()">Submit</button>
+<mat-dialog-actions [ngClass]="data ? 'dialog-actions-update' : ''">
+    @if (data) {
+        <button class="delete-btn" (click)="onSingleDelete(data.id)">
+            <mat-icon class="trash-icon">delete</mat-icon>
+        </button>
+    }
+    <div>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button (click)="onSubmit()">Submit</button>
+    </div>
 </mat-dialog-actions>

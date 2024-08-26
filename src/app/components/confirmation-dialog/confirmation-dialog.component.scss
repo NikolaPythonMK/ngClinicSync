@@ -1,0 +1,25 @@
+.dangerous {
+ color: #FF4C4C;
+}
+
+.warning {
+ color: #FFC107;
+}
+
+.info {
+    color: #17A2B8;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    font-size: 1.2rem;
+    margin-left: 1em;
+}
+
+.alert-icon {
+    font-size: 4rem;
+}

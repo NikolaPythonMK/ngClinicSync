@@ -2,7 +2,7 @@
     <header-app (onMenuToggle)="onMenuToggle($event)"></header-app>
 </div>
 <div class="container">
-    <main-sidenav [toggleMenu]="toggleMenu"></main-sidenav>
+    <main-sidenav [isOpen]="isOpen"></main-sidenav>
     <div class="content">
         <router-outlet></router-outlet>
     </div>

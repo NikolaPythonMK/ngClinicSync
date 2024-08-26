@@ -15,5 +15,41 @@
 }
 
 .paginator {
-    margin-top: 1em;
+    margin-top: 2em;
+    background-color: #fff;
+}
+
+.row {
+    cursor: pointer;
+}
+
+.row:hover {
+    background-color: aliceblue;
+}
+
+.delete-header {
+    display: flex;
+    align-items: center;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.delete-btn {
+    border: 0;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: .2em;
+}
+
+.trash-icon {
+    border: 1px solid #b8b5b5c2;
+    border-radius: 50%;
+    padding: .1em;
+    color: red;
+}
+
+.selected-items-label {
+    color: #6CB4EE;
+    font-size: 1.2rem;
 }

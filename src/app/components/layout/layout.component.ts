@@ -14,9 +14,9 @@ import { Router, RouterOutlet } from "@angular/router";
 })
 export class LayoutComponent {
 
-    toggleMenu = true;
+    isOpen = true;
 
-    onMenuToggle(isToggled: boolean): void {
-        this.toggleMenu = isToggled;
+    onMenuToggle(isOpen: boolean): void {
+        this.isOpen = isOpen;
     }
 }

@@ -5,6 +5,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterOutlet, RouterLink, RouterLinkActive } from "@angular/router";
 import { BreakpointService } from "../../services/breakpoint.service";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: 'main-sidenav',
@@ -17,17 +18,31 @@ import { BreakpointService } from "../../services/breakpoint.service";
               MatSidenavModule,
               MatListModule],
     templateUrl: 'sidenav.component.html',
-    styleUrls: ['sidenav.component.css']
+    styleUrls: ['sidenav.component.scss'],
+    animations: [
+        trigger('openClose', [
+            state('open', style({
+                width: '220px',
+            })),
+            state('closed', style({
+                width: '0px',
+                overflow: 'hidden'
+            })),
+            transition('open <=> closed', [
+                animate('300ms ease-in-out')
+            ])
+        ])
+    ]
 })
 export class SidenavComponent implements OnInit{
 
     constructor(public breakpointService : BreakpointService){}
 
-    @Input() toggleMenu = true;
+    @Input() isOpen = true;
 
     ngOnInit(): void {
         if(this.breakpointService.isMobile()){
-            this.toggleMenu = false;
+            this.isOpen = false;
         }
     }
 }

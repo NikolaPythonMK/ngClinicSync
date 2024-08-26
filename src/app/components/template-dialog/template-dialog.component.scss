@@ -15,3 +15,27 @@
 .name-input {
     outline-color: red;
 }
+
+.duration-group{
+    margin-top: .5em;
+    display: flex;
+}
+
+.hours-input {
+    margin-right: 1em;
+}
+
+.dialog-actions-update {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-btn {
+    border: 0;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.trash-icon {
+    color: red;
+}

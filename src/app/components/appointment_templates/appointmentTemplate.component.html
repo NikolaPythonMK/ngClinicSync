@@ -1,7 +1,6 @@
 <div class="wrapper">
 
 <content-header title="Templates" [totalCount]="totalElements" class="header"></content-header>
-
 @if (totalElements === 0) {
   <div>There are currently no appointment templates to display.</div>
 }
@@ -10,6 +9,14 @@
 }
 @else {
 <div class="table-container">
+  @if (selection.selected.length > 0) {
+    <div class="delete-header">
+      <span class="selected-items-label">{{ selection.selected.length }} selected</span>
+      <button class="delete-btn" (click)="handleOnSelectionDelete()">
+        <mat-icon class="trash-icon">delete</mat-icon>
+      </button>
+    </div>
+  }
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="select">
@@ -55,8 +62,8 @@
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-          (click)="selection.toggle(row)">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"
+          (click)="handleRowClick(row)">
       </tr>
   </table>
  </div>
