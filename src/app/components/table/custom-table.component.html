@@ -1,0 +1,57 @@
+@if (_tableData) {
+    <div class="wrapper">
+        <content-header [title]="_tableData.tableTitle" [totalCount]="_tableData.totalElements" class="header"
+            (searchTermChange)="handleSearch($event)" (onAddTemplate)="handleAdd()">
+        </content-header>
+    
+        @if (_tableData.totalElements === 0) {
+        <div class="content-message-container"><span class="content-message">{{ _tableData.emptyTableMessage }}</span></div>
+        }
+        @else if (_tableData.errorMessage){
+        <div class="content-message-container"><span class="content-message">{{ _tableData.errorMessage }}</span></div>
+        }
+        @else {
+        <div class="table-container">
+            @if (selection.selected.length > 0) {
+            <div class="delete-header">
+                <span class="selected-items-label">{{ selection.selected.length }} selected</span>
+                <button class="delete-btn" (click)="handleSelectionDelete()">
+                    <mat-icon class="trash-icon">delete</mat-icon>
+                </button>
+            </div>
+            }
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                          (change)="$event ? selection.toggle(row) : null"
+                                          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+        
+                    @for (col of filteredColumns; track $index) {
+                        <ng-container [matColumnDef]="col">
+                            <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+                            <td mat-cell *matCellDef="let template"> {{template[col]}} </td> 
+                        </ng-container>
+                    }
+    
+                    <tr mat-header-row *matHeaderRowDef="_tableData.displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: _tableData.displayedColumns;" class="row" (click)="handleRowClick(row)">
+                    </tr>
+                </table>
+        </div>
+    
+        <mat-paginator class="paginator" [length]="_tableData.totalElements" [pageIndex]="0" [pageSize]="15"
+            [pageSizeOptions]="[5, 10, 15, 25, 100]" (page)="handlePageChange($event)" aria-label="Select page">
+        </mat-paginator>
+        }
+    </div>
+}

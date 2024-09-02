@@ -7,9 +7,6 @@ import { MatInputModule } from "@angular/material/input";
 import { AppointmentTemplate } from "../../models/appointment-template";
 import { AppointmentTemplateRequest } from "../../models/appointment-template-request";
 import { MatIconModule } from "@angular/material/icon";
-import { TemplateService } from "../../services/template.service";
-import { NotificationService } from "../../services/notification.service";
-import { Dialog } from "@angular/cdk/dialog";
 import { DialogResult } from "../../models/dialog-result";
 import { HttpMethods } from "../../models/dialog-result";
 import { CommonModule } from "@angular/common";
@@ -32,9 +29,7 @@ export class TemplateDialogComponent implements OnInit{
     isSubmitted: boolean = false;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: AppointmentTemplate | null,
-                public dialogRef: MatDialogRef<TemplateDialogComponent>,
-                private templateService: TemplateService,
-                private notificationService: NotificationService){}
+                public dialogRef: MatDialogRef<TemplateDialogComponent>){}
 
     ngOnInit(): void {
         if(this.data !== null){

@@ -7,9 +7,10 @@
 </h1>
 <mat-dialog-content>
     <div class="form">
-        <mat-form-field appearance="outline" class="name-input">
+        <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input
+                required
                 [(ngModel)]="name"
                 name="name"
                 matInput
@@ -61,6 +62,7 @@
         </mat-form-field>
     </div>
 </mat-dialog-content>
+
 @if (isSubmitted && name.length === 0){
     <p class="error-message">Name is required.</p>
 }

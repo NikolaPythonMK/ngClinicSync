@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { PAGE_NUMBER, PAGE_SIZE, URL } from "../constants/constants";
 import { Page } from "../models/page";
 import { AppointmentTemplate } from "../models/appointment-template";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { AppointmentTemplateRequest } from "../models/appointment-template-request";
 
 @Injectable({
@@ -12,8 +12,13 @@ import { AppointmentTemplateRequest } from "../models/appointment-template-reque
 export class TemplateService {
     constructor(private http : HttpClient){}
 
-    getAll(page: number = PAGE_NUMBER, size: number = PAGE_SIZE): Observable<Page<AppointmentTemplate>> {
-        const params = new HttpParams().set('page', page).set('size', size);
+    getAll(page: number = PAGE_NUMBER, size: number = PAGE_SIZE, searchTerm?: string): Observable<Page<AppointmentTemplate>> {
+        let params = new HttpParams().set('page', page).set('size', size);
+
+        if (searchTerm){
+            params = params.set('searchTerm', searchTerm);
+        }
+
         return this.http.get<Page<AppointmentTemplate>>(`${URL}${'templates'}`, { params });
     }
 

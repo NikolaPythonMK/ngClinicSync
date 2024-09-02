@@ -15,30 +15,29 @@ import { DialogResult, HttpMethods } from "../../models/dialog-result";
 import { MatIconModule } from "@angular/material/icon";
 import { ConfirmationDialog } from "../confirmation-dialog/confirmation-dialog.component";
 import { AlertType } from "../../models/confirmation-dialog-data";
+import { ShortenPipe } from "../../pipes/shorten.pipe";
 
 
 @Component({
     selector: 'appointment-template-app',
     standalone: true,
-    imports: [MatTableModule, MatCheckboxModule, ContentHeader, MatPaginatorModule, MatIconModule],
+    imports: [MatTableModule, MatCheckboxModule, ContentHeader, MatPaginatorModule, MatIconModule, ShortenPipe],
     templateUrl: 'appointmentTemplate.component.html',
     styleUrls: ['appointmentTemplate.component.scss']
 })
 export class AppointmentTemplateComponent implements OnInit {
     displayedColumns: string[] = ['select', 'id', 'name', 'description', 'duration', 'price']
     dataSource = new MatTableDataSource<AppointmentTemplate>();
-    selectedRows: number[] = [];
-    initialSelection = [];
-    allowMultiSelect = true;
-    selection = new SelectionModel<AppointmentTemplate>(this.allowMultiSelect, this.initialSelection);
+    selection = new SelectionModel<AppointmentTemplate>(true, []);
+
     totalElements: number = 0;
     errorMessage?: string;
     readonly dialog = inject(MatDialog);
 
     pageNumber: number = 1;
     pageSize: number = 15;
+    searchTerm: string = '';
 
-    //selectedRows: any[] = [];
 
     constructor(private appointmentTemplateService : TemplateService,
                 private router : Router,
@@ -53,17 +52,9 @@ export class AppointmentTemplateComponent implements OnInit {
                 this.totalElements = result.totalElements;
             },
             error: (error) => {
-                this.errorMessage = error;
-                console.log('error: ', error);
+                this.errorMessage = error.message;
             },
         })
-    }
-
-    onSelectRow(id: number, event: Event): void {
-        event.stopPropagation();
-        this.selectedRows.push(id);
-        console.log(this.selectedRows);
-
     }
 
     toggleAllRows(): void {
@@ -83,7 +74,6 @@ export class AppointmentTemplateComponent implements OnInit {
     }
 
     handleRowClick(template: AppointmentTemplate){
-        console.log(this.selection)
         const dialogRef = this.dialog.open(TemplateDialogComponent, {
             width: '600px',
             height: '750px',
@@ -110,7 +100,7 @@ export class AppointmentTemplateComponent implements OnInit {
                 const data = result.data as number;
                 this.appointmentTemplateService.deleteSingle(data).subscribe({
                     next: (result) => {
-                        this.getAppointmentTemplates(this.pageNumber, this.pageSize);
+                        this.getAppointmentTemplates();
                         this.notificationService.success(`The template ${result.name} has been deleted successfully.`)
                     },
                     error: (error) => {
@@ -136,7 +126,7 @@ export class AppointmentTemplateComponent implements OnInit {
             queryParamsHandling: 'merge'
         })
 
-        this.getAppointmentTemplates(this.pageNumber, this.pageSize);
+        this.getAppointmentTemplates();
     }
 
     handleOnSelectionDelete(): void {
@@ -155,7 +145,7 @@ export class AppointmentTemplateComponent implements OnInit {
                 const ids: number[] = this.selection.selected.map(i => i.id);
                 this.appointmentTemplateService.deleteSelection(this.isAllSelected(), ids).subscribe({
                     next: () => {
-                        this.getAppointmentTemplates(this.pageNumber, this.pageSize);
+                        this.getAppointmentTemplates();
                         this.notificationService.success('The appointment templates have been deleted successfully.')
                     },
                     error: (error) => {
@@ -166,10 +156,20 @@ export class AppointmentTemplateComponent implements OnInit {
         })
     }
 
-    private getAppointmentTemplates(page: number, size: number): void {
-        this.appointmentTemplateService.getAll(page, size).subscribe({
+    handleAddTemplate(): void {
+        this.getAppointmentTemplates();
+    }
+
+    handleSearch(term: string):void {
+        this.searchTerm = term;
+        this.getAppointmentTemplates();
+    }
+
+    private getAppointmentTemplates(): void {
+        this.appointmentTemplateService.getAll(this.pageNumber, this.pageSize, this.searchTerm).subscribe({
             next: (result) => {
                 this.dataSource = new MatTableDataSource<AppointmentTemplate>(result.content);
+                this.totalElements = result.totalElements;
             },
             error: (error) => {
                 this.errorMessage = error;

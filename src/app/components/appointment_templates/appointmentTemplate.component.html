@@ -1,11 +1,16 @@
 <div class="wrapper">
 
-<content-header title="Templates" [totalCount]="totalElements" class="header"></content-header>
+<content-header title="Templates"
+                [totalCount]="totalElements"
+                class="header"
+                (searchTermChange)="handleSearch($event)"
+                (onAddTemplate)="handleAddTemplate()"></content-header>
+                
 @if (totalElements === 0) {
-  <div>There are currently no appointment templates to display.</div>
+  <div class="content-message-container"><span class="content-message">There are currently no appointment templates to display.</span></div>
 }
 @else if (errorMessage){
-  <div>{{ errorMessage }}</div>
+  <div class="content-message-container"><span class="content-message">{{ errorMessage }}</span></div>
 }
 @else {
 <div class="table-container">
@@ -46,9 +51,9 @@
         <td mat-cell *matCellDef="let template"> {{template.name}} </td>
       </ng-container>
     
-      <ng-container matColumnDef="description">
+      <ng-container matColumnDef="description" class="description-column">
         <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let template"> {{template.description}} </td>
+        <td mat-cell *matCellDef="let template" class="description-column"> {{ template.description | shorten:50 }} </td>
       </ng-container>
     
       <ng-container matColumnDef="duration">

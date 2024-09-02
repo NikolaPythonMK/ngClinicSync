@@ -1,0 +1,40 @@
+.wrapper{   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title-container{
+        display: flex;
+        align-items: center;
+        .totalCount {
+            background-color: #6CB4EE;
+            border-radius: 50%;
+            padding: 5px;
+            color: #fff;
+            margin-left: 5px;
+        }
+    }
+    .filters-container{
+        ::ng-deep .mat-mdc-text-field-wrapper {
+            height: 40px !important;
+        }
+        ::ng-deep .mat-mdc-form-field-flex {
+            margin-top: -7px !important;
+        }
+    }
+}
+
+.create-button {
+    background-color: #6CB4EE;
+    border: 0;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: .5em;
+    margin-right: 1em;
+    border-radius: 10%;
+    cursor: pointer;
+
+}
+
+.create-button:hover {
+    background-color: #4a9adb;
+}

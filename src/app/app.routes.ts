@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AppointmentTemplateComponent } from './components/appointment_templates/AppointmentTemplate.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ClientComponent } from './components/clients/clients.component';
 
 
 export const routes: Routes = [
@@ -14,7 +15,8 @@ export const routes: Routes = [
       canActivate: [AuthGuard],
       //canActivateChild: [AuthGuard],
       children: [
-        { path: 'templates', component: AppointmentTemplateComponent }
+        { path: 'templates', component: AppointmentTemplateComponent },
+        { path: 'clients', component: ClientComponent}
       ]
     }
 ];

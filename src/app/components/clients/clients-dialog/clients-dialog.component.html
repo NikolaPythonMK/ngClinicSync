@@ -1,0 +1,86 @@
+<h1 mat-dialog-title>
+    @if (data === null) {
+        <span>Add Client</span>
+    }@else {
+        <span>Update Client</span>
+    }
+</h1>
+<mat-dialog-content>
+    <div class="form">
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+                required
+                [(ngModel)]="firstName"
+                name="name"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+                required
+                [(ngModel)]="lastName"
+                name="lastName"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input
+                [(ngModel)]="phone"
+                name="phone"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+                [(ngModel)]="email"
+                name="email"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input
+                [(ngModel)]="address"
+                name="address"
+                matInput
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [(ngModel)]="dateOfBirth" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+
+    </div>
+</mat-dialog-content>
+
+@if (isSubmitted && firstName?.length === 0){
+    <p class="error-message">Name is required.</p>
+}
+@if (isSubmitted && lastName?.length === 0){
+    <p class="error-message">Last name is required.</p>
+}
+
+<mat-dialog-actions [ngClass]="data ? 'dialog-actions-update' : ''">
+    @if (data) {
+        <button class="delete-btn" (click)="onSingleDelete(data.id)">
+            <mat-icon class="trash-icon">delete</mat-icon>
+        </button>
+    }
+    <div>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button (click)="onSubmit()">Submit</button>
+    </div>
+</mat-dialog-actions>

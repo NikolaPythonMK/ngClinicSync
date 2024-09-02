@@ -1,0 +1,97 @@
+<div class="wrapper">
+
+    <clients-header title="Clients"
+                    [totalCount]="totalElements"
+                    class="header"
+                    (searchTermChange)="handleSearch($event)"
+                    (onAddClient)="handleAddClient()"></clients-header>
+                    
+    @if (totalElements === 0) {
+      <div class="content-message-container"><span class="content-message">There are currently no clients to display.</span></div>
+    }
+    @else if (errorMessage){
+      <div class="content-message-container"><span class="content-message">{{ errorMessage }}</span></div>
+    }
+    @else {
+    <div class="table-container">
+      @if (selection.selected.length > 0) {
+        <div class="delete-header">
+          <span class="selected-items-label">{{ selection.selected.length }} selected</span>
+          <button class="delete-btn" (click)="handleOnSelectionDelete()">
+            <mat-icon class="trash-icon">delete</mat-icon>
+          </button>
+        </div>
+      }
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let client"> {{client.id}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let client"> {{client.firstName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let client"> {{client.lastName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let client"> {{client.phone}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let client"> {{client.address}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateOfBirth">
+            <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+            <td mat-cell *matCellDef="let client"> {{client.dateOfBirth}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"
+              (click)="handleRowClick(row)">
+          </tr>
+      </table>
+     </div>
+      
+      <mat-paginator
+        class="paginator"
+        [length]="totalElements"
+        [pageIndex]="0"
+        [pageSize]="15"
+        [pageSizeOptions]="[5, 10, 15, 25, 100]"
+        (page)="handlePageChange($event)"
+        aria-label="Select page">
+      </mat-paginator>
+    }
+     </div> 
+     
