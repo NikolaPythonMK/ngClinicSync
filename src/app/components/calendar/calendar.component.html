@@ -1,0 +1,312 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title"><mat-icon>schedule</mat-icon></span>
+            </div>
+            <div class="row-container">
+                <div class="row time-label">8:00</div>
+                <div class="row time-label half-hour-label">8:30</div>
+                <div class="row time-label">9:00</div>
+                <div class="row time-label half-hour-label">9:30</div>
+                <div class="row time-label">10:00</div>
+                <div class="row time-label half-hour-label">10:30</div>
+                <div class="row time-label">11:00</div>
+                <div class="row time-label half-hour-label">11:30</div>
+                <div class="row time-label">12:00</div>
+                <div class="row time-label half-hour-label">12:30</div>
+                <div class="row time-label">13:00</div>
+                <div class="row time-label half-hour-label">13:30</div>
+                <div class="row time-label">14:00</div>
+                <div class="row time-label half-hour-label">14:30</div>
+                <div class="row time-label">15:00</div>
+                <div class="row time-label half-hour-label">15:30</div>
+                <div class="row time-label">16:00</div>
+                <div class="row time-label half-hour-label">16:30</div>
+                <div class="row time-label">17:00</div>
+                <div class="row time-label half-hour-label">17:30</div>
+                <div class="row time-label">18:00</div>
+                <div class="row time-label half-hour-label">18:30</div>
+                <div class="row time-label">19:00</div>
+                <div class="row time-label half-hour-label">19:30</div>
+                <div class="row time-label">20:00</div>
+                <div class="row time-label half-hour-label">20:30</div>
+                <div class="row time-label">21:00</div>
+                <div class="row time-label half-hour-label">21:30</div>
+                <div class="row time-label">22:00</div>
+                <div class="row time-label half-hour-label">22:30</div>
+                <div class="row time-label">23:00</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Monday</span>
+                <span class="total">2</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(0); track block){
+                    <div class="row" 
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.occupied-block]="block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 == 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <!-- <span>{{ block.appointment?.date?.getHours() }} - {{ block.appointment?.duration }}</span> -->
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+            
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Tuesday</span>
+                <span class="total">1</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(1); track block){
+                    <div class="row" 
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.occupied-block]="block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Wednesday</span>
+                <span class="total">1</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(2); track block){
+                    <div class="row" [class.occupied-block]="block.isOccupied"
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Thursday</span>
+                <span class="total">1</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(3); track block){
+                    <div class="row" [class.occupied-block]="block.isOccupied"
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+        <div class="col" style="border-left: 2px solid #a5d5e4; border-right: 2px solid #a5d5e4; ">
+            <div class="title-container current-day">
+                <span class="col-title">Friday</span>
+                <span class="total">1</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(4); track block){
+                    <div class="row" [class.occupied-block]="block.isOccupied"
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Saturday</span>
+                <span class="total">0</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(5); track block){
+                    <div class="row" [class.occupied-block]="block.isOccupied"
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+        <div class="col">
+            <div class="title-container">
+                <span class="col-title">Sunday</span>
+                <span class="total">0</span>
+            </div>
+            <div class="row-container">
+                @for (block of calendarBlocks.get(6); track block){
+                    <div class="row" [class.occupied-block]="block.isOccupied"
+                                     [class.booked-appointment]="block.appointment"
+                                     [class.bookable-block]="!block.isOccupied"                               
+                                     [class.light-border]="block.row % 2 !== 0" [class.dark-border]="block.row % 2 === 0">
+                                     <span>{{ block.appointment?.label?.name }}</span>
+                                     <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                     <span>{{ block.appointment?.client?.phone }}</span>
+
+                    </div>
+                    <!-- @if (block.isOccupied) {
+                        @if (block.isExtend) {
+                            <div class="row" [style.backgroundColor]="block.color">
+                                
+                            </div>
+                        } 
+                        @else {
+                            <div class="row booked-appointment" [style.backgroundColor]="block.color">
+                                <span>{{ block.appointment?.label?.name }}</span>
+                                <span>{{ block.appointment?.client?.firstName }} {{ block.appointment?.client?.lastName }}</span>
+                                <span>{{ block.appointment?.client?.email }}</span>
+                                <span>{{ block.appointment?.client?.phoneNumber }}</span>
+                            </div>
+                        }
+                    } @else {
+                        <div class="row bookable-block">
+                       
+                        </div>
+                    } -->
+                }
+            </div>
+        </div>
+    </div>
+</div>

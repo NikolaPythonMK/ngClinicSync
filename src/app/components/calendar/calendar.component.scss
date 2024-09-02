@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 90%; /** why the container doesn't take the whole space without width: ?  **/
+    height: 80vh; /** temporary  **/
+    margin-top: 5%; /** temporary  **/
+    display: grid;
+    grid-template-columns: auto repeat(7, 1fr);
+}
+
+.col {
+    border-right: 1px solid lightgray;
+}
+
+.title-container{
+    display: flex;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    background-color: #E1EBEE;
+
+    top: 0;
+    position: sticky;
+    z-index: 1000;
+}
+
+.col-title{
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.total{
+    background-color: #54b2d3;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.current-day{
+    font-weight: bold;
+    background-color: #a5d5e4;
+}
+
+.row{
+    /* border-bottom: 1px solid gray; */
+    height: 70px; /**  can't do it with padding **/
+}
+
+.occupied-block{
+    background-color: #007FFF;
+}
+
+
+.light-border{
+    border-bottom: 1px solid black;
+}
+
+.dark-border{
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.time-label{
+    margin-top: -.5px;
+    padding: 5px;
+}
+
+.booked-appointment{
+    display: flex;
+    flex-direction: column;
+    font-size: .8rem;
+    border-bottom: 0;
+    color: #fff
+    
+}
+
+.booked-appointment span {
+    padding: .2em;
+}
+
+.bookable-block:hover{
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.half-hour-label{
+    color: #c7c7c7;
+}
+
+
+/* .extended-block{
+    height: 50%;
+} */

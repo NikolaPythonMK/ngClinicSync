@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AppointmentTemplateComponent } from './components/appointment_templates/AppointmentTemplate.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ClientComponent } from './components/clients/clients.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 export const routes: Routes = [
@@ -15,8 +16,9 @@ export const routes: Routes = [
       canActivate: [AuthGuard],
       //canActivateChild: [AuthGuard],
       children: [
+        { path: 'appointments', component: CalendarComponent },
         { path: 'templates', component: AppointmentTemplateComponent },
-        { path: 'clients', component: ClientComponent}
+        { path: 'clients', component: ClientComponent},
       ]
     }
 ];
